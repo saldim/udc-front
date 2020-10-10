@@ -175,7 +175,24 @@ export default {
         this.fetchSearchResults();
       }
     }
+  },
+  head() {
+    return {
+      title: 'УДК',
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Справочник по УДК для статьи. Данный ресурс является информационно-справочной системой УДК, описывающей универсальную десятичную классификацию УДК. Определить индекс УДК для статьи онлан УДК и БКБ.'
+        },
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: 'УДК, классификатор УДК, код УДК, УДК для статьи, индекс УДК, определить УДК, УДК онлайн, УДК БКБ',
+        }
+      ]
+    }
   }
-
 }
 </script>

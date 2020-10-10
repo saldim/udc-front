@@ -37,6 +37,15 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     'nuxt-clipboard2',
+    ['@nuxtjs/yandex-metrika',
+    {
+      id: '68148865',
+      webvisor: true,
+      clickmap:true,
+      // useCDN:false,
+       trackLinks: true,
+       accurateTrackBounce:true,
+    }],
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
