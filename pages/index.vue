@@ -2,6 +2,7 @@
   <div>
     <b-spinner class="loading-spinner" v-show="loading"></b-spinner>
     <div class="container" v-bind:class="{'blured': loading}">
+      <div class="journal-logo" @click="openJournalSite()"></div>
       <h2 class="my-3 text-center">{{ title }}</h2>
       <b-form-input
         v-model="filter"
@@ -9,7 +10,7 @@
         id="filterInput"
         placeholder="Начните вводить название или код..." class="my-3 search-form" v-if="showSearch" v-bind:disabled="loading"></b-form-input>
       <div class="text-center" v-else>
-        <b-button class="mb-3 mx-auto back-button" @click="goBack()">← Назад</b-button>
+        <b-button class="mb-3 mx-auto back-button" variant="outline-primary" @click="goBack()">← Назад</b-button>
       </div>
       <b-table striped no-select-on-click hover :items="udcs" :fields="fields" :key="udcs[0].id" v-if="udcs.length"
                @row-clicked="rowClickedHandler" ref="mainTbl" class="main-table">
@@ -28,12 +29,25 @@
       </b-table>
       <div class="text-center" v-else>
         Ничего не найдено
+         <div class="mt-3"><b-button variant="outline-primary" @click="clearSearch()">Показать все</b-button></div>
       </div>
+      <footer><div class="text-center pb-3">© 2017-{{ new Date().getFullYear() }} НАУЧНО-ИЗДАТЕЛЬСКИЙ ЦЕНТР "ВЕСТНИК НАУКИ"</div></footer>
     </div>
   </div>
 </template>
 
 <style>
+.journal-logo{
+  width: 100%;
+  height: 12rem;
+  margin: 1.2rem auto;
+  background: url("/images/journal-logo.svg");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
 .search-form {
   width: 70%;
   text-align: center;
@@ -52,9 +66,8 @@
 
 .loading-spinner{
   position: fixed;
-  bottom: 50%;
-  left: 50%;
-  right: 50%;
+  left: 47%;
+  top: 44%;
   width: 4rem;
   height: 4rem;
 }
@@ -66,7 +79,6 @@
 .blured{
   filter: blur(2px);
 }
-
 </style>
 
 <script>
@@ -87,6 +99,9 @@ export default {
     }
   },
   methods: {
+    openJournalSite(){
+      window.open('http://perviy-vestnik.ru/?utm_source=udc', '_blank')
+    },
     async fetchSearchResults() {
       if (this.filter.length > 0) {
         const res = await this.$axios.get("/api/search?request=" + this.filter);
@@ -141,8 +156,6 @@ export default {
       if (record.hasChilds) {
         this.fetchChild(record.id, record.title)
       }
-      // await this.$copyText(record.code.toString());
-      // this.showToast("Код УДК " + record.code + " " + record.title + " скопирован в буфер обмена")
     },
     showToast(text) {
       this.$bvToast.toast(text, {
@@ -151,6 +164,9 @@ export default {
         appendToast: true,
         noCloseButton: true,
       })
+    },
+    clearSearch(){
+      this.filter = ''
     }
   },
   watch: {
