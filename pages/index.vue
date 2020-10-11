@@ -10,7 +10,7 @@
         id="filterInput"
         placeholder="Начните вводить название или код..." class="my-3 search-form" v-if="showSearch" v-bind:disabled="loading"></b-form-input>
       <div class="text-center" v-else>
-        <b-button class="mb-3 mx-auto back-button" variant="outline-primary" @click="goBack()">← Назад</b-button>
+      <b-button class="mb-3 mx-auto back-button" variant="outline-primary" @click="goBack()">← Назад</b-button>  <b-button class="mb-3 mx-auto home-button-wrapper" variant="primary" @click="goHome()"><img src="/icons/home.svg" alt="На главную" class="home-button"></b-button>
       </div>
       <b-table striped no-select-on-click hover :items="udcs" :fields="fields" :key="udcs[0].id" v-if="udcs.length"
                @row-clicked="rowClickedHandler" ref="mainTbl" class="main-table">
@@ -31,7 +31,7 @@
         Ничего не найдено
          <div class="mt-3"><b-button variant="outline-primary" @click="clearSearch()">Показать все</b-button></div>
       </div>
-      <footer><div class="text-center pb-3">© 2017-{{ new Date().getFullYear() }} НАУЧНО-ИЗДАТЕЛЬСКИЙ ЦЕНТР "ВЕСТНИК НАУКИ"</div></footer>
+      <footer><div class="text-center pb-3">© 2017-{{ new Date().getFullYear() }} <a href="http://perviy-vestnik.ru/?utm_source=udc" target="_blank">НАУЧНО-ИЗДАТЕЛЬСКИЙ ЦЕНТР "ВЕСТНИК НАУКИ"</a></div></footer>
     </div>
   </div>
 </template>
@@ -56,6 +56,16 @@
 
 .back-button {
   width: 8rem;
+}
+
+.home-button-wrapper {
+  width: 3.1rem;
+  text-align: center;
+}
+
+.home-button{
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .copy-icon {
