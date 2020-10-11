@@ -8,7 +8,7 @@
         v-model="filter"
         type="search"
         id="filterInput"
-        placeholder="Начните вводить название или код..." class="my-3 search-form" v-if="showSearch" v-bind:disabled="loading"></b-form-input>
+        placeholder="Начните вводить название или код..." class="my-3 search-form" v-if="showSearch" v-bind:disabled="loading" autofocus="autofocus"></b-form-input>
       <div class="text-center" v-else>
       <b-button class="mb-3 mx-auto back-button" variant="outline-primary" @click="goBack()">← Назад</b-button>  <b-button class="mb-3 mx-auto home-button-wrapper" variant="primary" @click="goHome()"><img src="/icons/home.svg" alt="На главную" class="home-button"></b-button>
       </div>
@@ -107,6 +107,12 @@ export default {
       currentId: null,
       loading: false,
     }
+  },
+  mounted(){
+    window.addEventListener('keypress', function(event){
+      let filterField = document.getElementById('filterInput');
+      filterField.focus();
+    })
   },
   methods: {
     openJournalSite(){
